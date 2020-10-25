@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "412315873232",
+    "firebase_url": "https://exceed-jobs-bee38.firebaseio.com",
+    "project_id": "exceed-jobs-bee38",
+    "storage_bucket": "exceed-jobs-bee38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412315873232:android:31a5bf362d10421dbd53d5",
+        "android_client_info": {
+          "package_name": "com.app.exceedjobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412315873232-lrsgchtl8tdav53q5om73bfscuipalec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.exceedjobs",
+            "certificate_hash": "a8db19f01d55936935454fe500b2e5b60fffe492"
+          }
+        },
+        {
+          "client_id": "412315873232-9kqnijf6rgmjim1m42bdmqig6ph37ri0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSFvTyKlqgtV9DRLkBTqLBdG9j11k95qI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412315873232-9kqnijf6rgmjim1m42bdmqig6ph37ri0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
