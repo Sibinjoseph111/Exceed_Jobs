@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class JobDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_job_detail);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -134,6 +136,8 @@ public class JobDetailActivity extends AppCompatActivity {
             company_TV.setTextColor(getResources().getColor(R.color.colorPrimary));
             email_TV.setText(R.string.become_paid);
             email_TV.setTextColor(getResources().getColor(R.color.colorPrimary));
+            link_TV.setText(R.string.become_paid);
+            link_TV.setTextColor(getResources().getColor(R.color.colorPrimary));
 
             contact_TV.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             contact_TV.setText(R.string.payment_reminder);

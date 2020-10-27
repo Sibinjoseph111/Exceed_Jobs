@@ -68,8 +68,8 @@ public class SignupActivity extends AppCompatActivity {
 
         if (name.length() == 0) name_IL.setError("Enter your name");
         else if (phone.length()<10) phone_IL.setError("Enter valid phone number");
-        else if (email.length() == 0) email_IL.setError("Enter your email address");
-        else if (address.length() == 0) address_IL.setError("Enter your address");
+//        else if (email.length() == 0) email_IL.setError("Enter your email address");/
+//        else if (address.length() == 0) address_IL.setError("Enter your address");
         else {
             checkInternet();
         }

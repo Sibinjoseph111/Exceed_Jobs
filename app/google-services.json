@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "412315873232-o70glgf5cfprqjfnb7mua1m4o87hlta2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.exceedjobs",
+            "certificate_hash": "3ef6e3d18674a09374cdb2cf5364ed02d3c527b0"
+          }
+        },
+        {
           "client_id": "412315873232-lrsgchtl8tdav53q5om73bfscuipalec.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
