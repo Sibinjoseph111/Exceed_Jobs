@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/jobListCard_CV"
@@ -12,7 +13,6 @@
         android:layout_marginVertical="10dp"
         app:cardElevation="7dp"
         app:cardCornerRadius="15dp">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,14 +26,12 @@
 
                 <TextView
                     android:id="@+id/jobListTitle_TV"
-                    android:layout_width="wrap_content"
+                    android:layout_width="210dp"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
                     android:text="Graphic Designer"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:maxLength="25"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/materialCardView"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -114,19 +112,20 @@
                     android:textSize="16sp"
                     android:maxLength="16"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/jobListExperience_TV"
+                    app:layout_constraintEnd_toStartOf="@+id/jobListQualification_TV"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
-                    android:id="@+id/jobListExperience_TV"
+                    android:id="@+id/jobListQualification_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="Experience: 1 year"
+                    android:text="Qualification: B-tech"
                     android:textColor="@color/grey"
                     android:textSize="16sp"
+                    android:maxLength="25"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

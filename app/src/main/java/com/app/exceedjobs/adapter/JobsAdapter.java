@@ -41,9 +41,14 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
         holder.title_TV.setText(jobs.get(position).getTitle());
         holder.location_TV.setText(" "+jobs.get(position).getLocation());
         holder.salary_TV.setText(" "+jobs.get(position).getSalary());
-        holder.experience_TV.setText("Experience: "+jobs.get(position).getExperience()+ " years");
+        holder.qualification_TV.setText("Qualification: "+jobs.get(position).getQualification());
         holder.date_TV.setText(jobs.get(position).getAdded_date());
-        holder.mode_TV.setText(jobs.get(position).getMode());
+        holder.mode_TV.setText(jobs.get(position).getJob_type());
+
+        if (jobs.get(position).getSalary().length() == 0 || jobs.get(position).getSalary().equals("0")) holder.salary_TV.setVisibility(View.GONE);
+
+//        holder.title_TV.setSelected(true);
+
 
         holder.jobCard_CV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +67,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
-        TextView title_TV, location_TV, salary_TV, mode_TV, date_TV, experience_TV;
+        TextView title_TV, location_TV, salary_TV, mode_TV, date_TV, qualification_TV;
         MaterialCardView jobCard_CV;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,8 +78,9 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
             salary_TV = mView.findViewById(R.id.jobListSalary_TV);
             mode_TV = mView.findViewById(R.id.jobListMode_TV);
             date_TV = mView.findViewById(R.id.jobListDate_TV);
-            experience_TV = mView.findViewById(R.id.jobListExperience_TV);
+            qualification_TV = mView.findViewById(R.id.jobListQualification_TV);
             jobCard_CV = mView.findViewById(R.id.jobListCard_CV);
+
         }
     }
 }

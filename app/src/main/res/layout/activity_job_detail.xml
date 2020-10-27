@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.JobDetailActivity">
+    tools:context=".activity.JobDetailActivity"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -31,7 +32,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appBarLayout">
+        android:layout_below="@id/appBarLayout"
+        android:layout_above="@+id/button">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,14 +48,12 @@
 
                 <TextView
                     android:id="@+id/jobDetailTitle_TV"
-                    android:layout_width="wrap_content"
+                    android:layout_width="210dp"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
                     android:text="Graphic Designer"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:maxLength="25"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/materialCardView"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -129,6 +129,7 @@
                 android:textSize="18sp"/>
 
             <LinearLayout
+                android:id="@+id/company_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -158,11 +159,17 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="2"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/category_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -192,45 +199,58 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
+<!--            <LinearLayout-->
+<!--                android:id="@+id/jobProfile_LL"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:weightSum="3"-->
+<!--                android:layout_marginVertical="5dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1.05"-->
+<!--                    android:text="Job Profile"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/black"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text=": "-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/jobDetailProfile_TV"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="2"-->
+<!--                    android:text=""-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textColor="@color/grey"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:ellipsize="marquee"-->
+<!--                    android:marqueeRepeatLimit ="marquee_forever"-->
+<!--                    android:focusable="true"-->
+<!--                    android:focusableInTouchMode="true"-->
+<!--                    android:scrollHorizontally="true"/>-->
+
+<!--            </LinearLayout>-->
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginVertical="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.05"
-                    android:text="Job Profile"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=": "
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/jobDetailProfile_TV"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:textSize="18sp"
-                    android:textColor="@color/grey"
-                    android:singleLine="true"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/salary_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -260,12 +280,18 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/experience_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -295,11 +321,17 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/qualification_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -329,11 +361,17 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/age_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -363,11 +401,17 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/days_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -397,11 +441,57 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/time_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.05"
+                    android:text="Work Time"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=": "
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/jobDetailTime_TV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:textColor="@color/grey"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/email_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -432,19 +522,65 @@
                     android:textIsSelectable="true"
                     android:textSize="18sp"
                     android:textColor="@color/grey"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/link_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.05"
+                    android:text="Job Link"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=": "
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/jobDetailLink_TV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text=""
+                    android:textIsSelectable="true"
+                    android:textSize="19sp"
+                    android:textColor="@color/link"
+                    android:singleLine="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openLink" />
 
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/contact_CV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

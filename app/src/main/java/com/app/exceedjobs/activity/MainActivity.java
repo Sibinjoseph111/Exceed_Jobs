@@ -21,6 +21,7 @@ import com.app.exceedjobs.model.JobModel;
 import com.app.exceedjobs.model.UserModel;
 import com.app.exceedjobs.utility.InternetCheck;
 import com.app.exceedjobs.utility.RetrofitClient;
+import com.google.android.material.progressindicator.ProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private JobApi mJobApi;
     private UserApi mUserApi;
     private String userPhone;
+
     //widgets
     private RecyclerView jobs_RV;
+    private ProgressIndicator progressIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         jobs_RV = findViewById(R.id.jobs_RV);
+        progressIndicator = findViewById(R.id.progressBar);
 
         mJobApi = RetrofitClient.getClient().create(JobApi.class);
         mUserApi = RetrofitClient.getClient().create(UserApi.class);
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadContents() {
+        progressIndicator.setVisibility(View.VISIBLE);
 
         new InternetCheck(new InternetCheck.Consumer() {
             @Override
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     getUser();
 
                 }else {
+                    progressIndicator.setVisibility(View.GONE);
                     Log.d("INTERNET","NO INTERNET");
                     final Snackbar snackbar =  Snackbar.make(findViewById(android.R.id.content), "Bad network connection. Try again", Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction("Retry", new View.OnClickListener() {
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<JobModel>>() {
             @Override
             public void onResponse(Call<List<JobModel>> call, Response<List<JobModel>> response) {
+                progressIndicator.setVisibility(View.GONE);
                 if (!response.isSuccessful()){
                     final Snackbar snackbar =  Snackbar.make(findViewById(android.R.id.content), "Error fetching jobs. Try again", Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction("Retry", new View.OnClickListener() {
@@ -133,8 +140,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (!isLogin())  startActivity(new Intent(this,CoverActivity.class));
-        else loadContents();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadContents();
     }
 
     private Boolean isLogin() {

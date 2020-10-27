@@ -55,6 +55,12 @@ public class JobModel implements Parcelable {
     @SerializedName("email")
     String email;
 
+    @SerializedName("workingtime")
+    String workingTime;
+
+    @SerializedName("joblink")
+    String link;
+
     public String getId() {
         return id;
     }
@@ -119,6 +125,14 @@ public class JobModel implements Parcelable {
         return email;
     }
 
+    public String getWorkingTime() {
+        return workingTime;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
     protected JobModel(Parcel in) {
         id = in.readString();
         title = in.readString();
@@ -136,6 +150,8 @@ public class JobModel implements Parcelable {
         work_days = in.readString();
         contact = in.readString();
         email = in.readString();
+        workingTime = in.readString();
+        link = in.readString();
     }
 
     public static final Creator<JobModel> CREATOR = new Creator<JobModel>() {
@@ -173,5 +189,7 @@ public class JobModel implements Parcelable {
         parcel.writeString(work_days);
         parcel.writeString(contact);
         parcel.writeString(email);
+        parcel.writeString(workingTime);
+        parcel.writeString(link);
     }
 }
