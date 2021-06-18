@@ -1,5 +1,6 @@
 package com.app.exceedjobs.api;
 
+import com.app.exceedjobs.model.MessageModel;
 import com.app.exceedjobs.model.UserModel;
 
 import java.util.HashMap;
@@ -22,4 +23,7 @@ public interface UserApi {
     @Headers("Content-Type: application/json")
     @POST("user_register")
     Call<Void> signup(@Body HashMap<String,String> signupCredentials);
+
+    @GET("listmessage")
+    Call<List<MessageModel>> getMessages();
 }

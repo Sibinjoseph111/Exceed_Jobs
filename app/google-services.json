@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "412315873232-540bti54j1idvtpluj44vri9abu3172v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.exceedjobs",
+            "certificate_hash": "5812a7c8a1060516e71b3ef4c4a55be9fdd689cd"
+          }
+        },
+        {
+          "client_id": "412315873232-0v18sm95ct9fm56i69bgu9841gmgt9fc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.exceedjobs",
+            "certificate_hash": "4cd7288d260d9600a5fb282a68e232a04931a90f"
+          }
+        },
+        {
           "client_id": "412315873232-o70glgf5cfprqjfnb7mua1m4o87hlta2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

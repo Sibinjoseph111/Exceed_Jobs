@@ -71,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private void getUser(final String phone) {

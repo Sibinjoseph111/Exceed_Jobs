@@ -45,6 +45,9 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
         holder.date_TV.setText(jobs.get(position).getAdded_date());
         holder.mode_TV.setText(jobs.get(position).getJob_type());
 
+        if (jobs.get(position).getJob_type().length() == 0) holder.mode_TV.setText("Full time");
+
+
         if (jobs.get(position).getSalary().length() == 0 || jobs.get(position).getSalary().equals("0")) holder.salary_TV.setVisibility(View.GONE);
 
 //        holder.title_TV.setSelected(true);

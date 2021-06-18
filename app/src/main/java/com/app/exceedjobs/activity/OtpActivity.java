@@ -295,13 +295,14 @@ public class OtpActivity extends AppCompatActivity {
 
     private void setOtpText(PhoneAuthCredential credential) {
         String SMScode = credential.getSmsCode();
-        otp1_ET.setText(String.valueOf(SMScode.charAt(0)));
-        otp2_ET.setText(String.valueOf(SMScode.charAt(1)));
-        otp3_ET.setText(String.valueOf(SMScode.charAt(2)));
-        otp4_ET.setText(String.valueOf(SMScode.charAt(3)));
-        otp5_ET.setText(String.valueOf(SMScode.charAt(4)));
-        otp6_ET.setText(String.valueOf(SMScode.charAt(5)));
-
+        if(SMScode !=null) {
+            otp1_ET.setText(String.valueOf(SMScode.charAt(0)));
+            otp2_ET.setText(String.valueOf(SMScode.charAt(1)));
+            otp3_ET.setText(String.valueOf(SMScode.charAt(2)));
+            otp4_ET.setText(String.valueOf(SMScode.charAt(3)));
+            otp5_ET.setText(String.valueOf(SMScode.charAt(4)));
+            otp6_ET.setText(String.valueOf(SMScode.charAt(5)));
+        }
         if (!signinProgress) signInWithPhoneAuthCredential(credential);
     }
 

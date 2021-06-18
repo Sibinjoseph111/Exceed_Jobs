@@ -30,8 +30,8 @@ public class JobDetailActivity extends AppCompatActivity {
 
     //widget
     private MaterialToolbar toolbar;
-    private TextView title_TV, location_TV, salary_TV, mode_TV, date_TV, experience_TV, description_TV, company_TV, category_TV, qualification_TV, ageLimit_TV, workDays_TV,email_TV, contact_TV, workTime_TV, link_TV;
-    private LinearLayout company_LL, category_LL, jobProfile_LL, salary_LL, experience_LL, qualification_LL, age_LL, days_LL, email_LL, time_LL, link_LL;
+    private TextView title_TV, location_TV, salary_TV, mode_TV, date_TV, experience_TV, description_TV, company_TV, category_TV, qualification_TV, ageLimit_TV, workDays_TV,email_TV, benefits_TV, contact_TV, workTime_TV, link_TV;
+    private LinearLayout company_LL, category_LL, jobProfile_LL, salary_LL, experience_LL, qualification_LL, age_LL, days_LL, email_LL, time_LL, link_LL, benefits_LL;
     private CustomTabsIntent customTabsIntent;
     private MaterialCardView contact_CV;
 
@@ -66,6 +66,7 @@ public class JobDetailActivity extends AppCompatActivity {
         contact_TV = findViewById(R.id.contact_TV);
         workTime_TV = findViewById(R.id.jobDetailTime_TV);
         link_TV = findViewById(R.id.jobDetailLink_TV);
+        benefits_TV = findViewById(R.id.jobDetailBenifit_TV);
         contact_CV = findViewById(R.id.contact_CV);
 
         company_LL = findViewById(R.id.company_LL);
@@ -79,6 +80,7 @@ public class JobDetailActivity extends AppCompatActivity {
         time_LL = findViewById(R.id.time_LL);
         email_LL = findViewById(R.id.email_LL);
         link_LL = findViewById(R.id.link_LL);
+        benefits_LL = findViewById(R.id.benifit_LL);
 
         setContents();
 
@@ -104,6 +106,9 @@ public class JobDetailActivity extends AppCompatActivity {
         if (job.getWorkingTime().trim().length() == 0) time_LL.setVisibility(View.GONE);
         if (job.getEmail().trim().length() == 0) email_LL.setVisibility(View.GONE);
         if (job.getLink().trim().length() == 0) link_LL.setVisibility(View.GONE);
+        if (job.getOtherBenifits().trim().length() == 0) benefits_LL.setVisibility(View.GONE);
+
+
 
         title_TV.setText(job.getTitle());
         location_TV.setText(" "+job.getLocation());
@@ -121,6 +126,7 @@ public class JobDetailActivity extends AppCompatActivity {
         email_TV.setText(job.getEmail());
         workTime_TV.setText(job.getWorkingTime());
         link_TV.setText(job.getLink());
+        benefits_TV.setText(job.getOtherBenifits());
 
         experience_TV.setSelected(true);
         description_TV.setSelected(true);
@@ -129,6 +135,9 @@ public class JobDetailActivity extends AppCompatActivity {
 //        profile_TV.setSelected(true);
         qualification_TV.setSelected(true);
         email_TV.setSelected(true);
+
+        if (job.getJob_type().trim().length() == 0) mode_TV.setText("Full time");
+
 
 
         if (!paymentStatus){
@@ -170,5 +179,17 @@ public class JobDetailActivity extends AppCompatActivity {
             Log.e("Link Error",e.getMessage()+" ");
             Toast.makeText(this,"Error opening link. Copy the link and try in a browser.",Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void openEmail(View view) {
+        if (paymentStatus){
+            try {
+               startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+job.getEmail())));
+            }catch (Exception e){
+                Log.e("Email ERROR",e.getMessage());
+            }
+        }
+
+
     }
 }

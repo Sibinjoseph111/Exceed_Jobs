@@ -25,6 +25,8 @@ public class UserModel {
     @SerializedName("paid_status")
     String paymentStatus;
 
+
+
     public String getId() {
         return id;
     }
@@ -80,4 +82,6 @@ public class UserModel {
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
+
+
 }

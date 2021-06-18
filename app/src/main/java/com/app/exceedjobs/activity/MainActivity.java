@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.app.exceedjobs.adapter.JobsAdapter;
 import com.app.exceedjobs.api.JobApi;
 import com.app.exceedjobs.api.UserApi;
 import com.app.exceedjobs.model.JobModel;
+import com.app.exceedjobs.model.MessageModel;
 import com.app.exceedjobs.model.UserModel;
 import com.app.exceedjobs.utility.InternetCheck;
 import com.app.exceedjobs.utility.RetrofitClient;
@@ -26,12 +28,15 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.nikartm.support.BadgePosition;
+import ru.nikartm.support.ImageBadgeView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private JobApi mJobApi;
     private UserApi mUserApi;
-    private String userPhone;
+    private String userPhone, paymentStatus="0";
+    private int messageCount=0;
 
     //widgets
     private RecyclerView jobs_RV;
     private ProgressIndicator progressIndicator;
+    private ImageBadgeView message_IV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +64,17 @@ public class MainActivity extends AppCompatActivity {
 
         jobs_RV = findViewById(R.id.jobs_RV);
         progressIndicator = findViewById(R.id.progressBar);
+        message_IV = findViewById(R.id.message_IV);
 
         mJobApi = RetrofitClient.getClient().create(JobApi.class);
         mUserApi = RetrofitClient.getClient().create(UserApi.class);
 
-//        loadContents();
+        if (!isLogin())  startActivity(new Intent(this,CoverActivity.class));
+        else loadContents();
 
+//        loadContents();
     }
+
 
     private void loadContents() {
         progressIndicator.setVisibility(View.VISIBLE);
@@ -75,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
                     getJobs();
                     getUser();
+                    getMessages();
 
                 }else {
                     progressIndicator.setVisibility(View.GONE);
@@ -91,6 +103,68 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void getMessages() {
+
+        Call<List<MessageModel>> call = mUserApi.getMessages();
+        call.enqueue(new Callback<List<MessageModel>>() {
+            @Override
+            public void onResponse(Call<List<MessageModel>> call, Response<List<MessageModel>> response) {
+                if (!response.isSuccessful()){
+                    final Snackbar snackbar =  Snackbar.make(findViewById(android.R.id.content), "Error fetching messages. Try again", Snackbar.LENGTH_INDEFINITE);
+                    snackbar.setAction("Retry", view -> {
+                        loadContents();
+                        snackbar.dismiss();
+                    });
+                    snackbar.show();
+
+                }else {
+
+                    List<MessageModel> responseMessages = response.body();
+
+                    for (MessageModel message : responseMessages){
+                        if (message.getUserType().equals(paymentStatus)) messageCount++;
+                    }
+
+
+                    if (messageCount != 0) showMessageIndicator();
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MessageModel>> call, Throwable t) {
+                final Snackbar snackbar =  Snackbar.make(findViewById(android.R.id.content), "Something went wrong. Please try again", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+            }
+        });
+
+    }
+
+    private void showMessageIndicator() {
+
+        int count = getSharedPreferences(getString(R.string.sharedpreferences_ID),MODE_PRIVATE).getInt("messageCount",0);
+
+        if (messageCount > count){
+            Log.d("MessageCount", String.valueOf(messageCount-count));
+            message_IV.setBadgeValue(messageCount-count)
+                    .setBadgeTextSize(12)
+                    .setMaxBadgeValue(99)
+                    .setBadgeColor(getResources().getColor(R.color.black))
+                    .setBadgePosition(BadgePosition.TOP_RIGHT)
+                    .setBadgeTextColor(getResources().getColor(R.color.white))
+//                    .setBadgeBackground(getResources().getDrawable(R.drawable.badge))
+                    .setBadgeTextStyle(Typeface.BOLD)
+                    .setShowCounter(true)
+                    .setBadgePadding(3);
+        }else {
+            message_IV.setBadgeValue(0);
+
+        }
 
     }
 
@@ -139,14 +213,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (!isLogin())  startActivity(new Intent(this,CoverActivity.class));
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadContents();
+        showMessageIndicator();
     }
 
     private Boolean isLogin() {
@@ -169,9 +243,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (response.body().size() >0){
                         UserModel user = response.body().get(0);
+                        paymentStatus = user.getPaymentStatus();
                         SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.sharedpreferences_ID),MODE_PRIVATE).edit();
-                        editor.putString("paymentStatus",user.getPaymentStatus());
+                        editor.putString("paymentStatus",paymentStatus);
                         editor.apply();
+
+                        fcmSubscribe();
+
                     }
                 }
             }
@@ -206,5 +284,20 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MainActivity.this,CoverActivity.class));
         finish();
+    }
+
+    public void gotoMessages(View view) {
+        startActivity(new Intent(MainActivity.this,MessageActivity.class));
+
+    }
+
+    private void fcmSubscribe() {
+
+        FirebaseMessaging.getInstance().subscribeToTopic("global");
+
+        if (paymentStatus.equals("1")) FirebaseMessaging.getInstance().subscribeToTopic("paid_user");
+        else FirebaseMessaging.getInstance().subscribeToTopic("unpaid_user");
+
+
     }
 }

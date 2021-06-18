@@ -61,6 +61,9 @@ public class JobModel implements Parcelable {
     @SerializedName("joblink")
     String link;
 
+    @SerializedName("otherbenefit")
+    String otherBenifits;
+
     public String getId() {
         return id;
     }
@@ -133,6 +136,10 @@ public class JobModel implements Parcelable {
         return link;
     }
 
+    public String getOtherBenifits() {
+        return otherBenifits;
+    }
+
     protected JobModel(Parcel in) {
         id = in.readString();
         title = in.readString();
@@ -152,6 +159,7 @@ public class JobModel implements Parcelable {
         email = in.readString();
         workingTime = in.readString();
         link = in.readString();
+        otherBenifits = in.readString();
     }
 
     public static final Creator<JobModel> CREATOR = new Creator<JobModel>() {
@@ -191,5 +199,6 @@ public class JobModel implements Parcelable {
         parcel.writeString(email);
         parcel.writeString(workingTime);
         parcel.writeString(link);
+        parcel.writeString(otherBenifits);
     }
 }
